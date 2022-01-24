@@ -1,4 +1,4 @@
-import 'package:core/styles/text_styles.dart';
+import 'package:core/core.dart' show kHeading6, kRichBlack;
 import 'package:flutter/material.dart';
 
 class SubHeading extends StatelessWidget {
@@ -17,12 +17,18 @@ class SubHeading extends StatelessWidget {
           title,
           style: kHeading6,
         ),
-        InkWell(
-          onTap: onTap,
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              children: const [Text('See More'), Icon(Icons.arrow_forward_ios)],
+        Material(
+          color: kRichBlack,
+          child: InkWell(
+            onTap: onTap,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                children: const [
+                  Text('See More'),
+                  Icon(Icons.arrow_forward_ios)
+                ],
+              ),
             ),
           ),
         ),

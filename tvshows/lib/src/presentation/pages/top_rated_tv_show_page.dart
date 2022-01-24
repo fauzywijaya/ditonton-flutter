@@ -30,7 +30,7 @@ class _TopRatedTvShowPageState extends State<TopRatedTvShowPage> {
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: BlocBuilder<TopRatedTvShowBloc, TopRatedTvShowState>(
-          key: const Key('tpop_rated_tv_shows'),
+          key: const Key('top_rated_tv_shows'),
           builder: (context, state) {
             if (state is TopRatedTvShowLoading) {
               return const Center(
@@ -52,7 +52,7 @@ class _TopRatedTvShowPageState extends State<TopRatedTvShowPage> {
               );
             } else {
               return Center(
-                key: Key('error_message'),
+                key: const Key('error_message'),
                 child: Text((state as TopRatedTvShowError).message),
               );
             }

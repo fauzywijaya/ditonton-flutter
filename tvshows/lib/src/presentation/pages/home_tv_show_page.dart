@@ -139,7 +139,7 @@ class TvShowList extends StatelessWidget {
           final _tvshow = tvShows[index];
           return CardImage(
               key: Key("$description-$index"),
-              activeDrawerItem: ItemEnum.TvShow,
+              activeItem: ItemEnum.TvShow,
               routeNameDestination: TvShowDetailPage.routeName,
               tvShow: _tvshow);
         },

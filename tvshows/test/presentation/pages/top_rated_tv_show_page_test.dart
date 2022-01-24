@@ -53,7 +53,7 @@ void main() {
 
     expect(find.byType(AppBar), findsOneWidget);
     expect(find.byType(ListView), findsOneWidget);
-    expect(find.text('Top Rated TvShow'), findsOneWidget);
+    expect(find.text('Top Rated Tv Shows'), findsOneWidget);
     expect(find.byKey(const Key('top_rated_tv_shows')), findsOneWidget);
   });
 

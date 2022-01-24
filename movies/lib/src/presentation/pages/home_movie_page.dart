@@ -65,6 +65,7 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
             ),
             const SizedBox(height: 8.0),
             SubHeading(
+              key: const Key('see_more_popular_movies'),
               title: 'Popular',
               onTap: () =>
                   Navigator.pushNamed(context, PopularMoviesPage.routeName),
@@ -93,6 +94,7 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
             ),
             const SizedBox(height: 8.0),
             SubHeading(
+              key: const Key('see_more_top_rated_movies'),
               title: 'Top Rated',
               onTap: () =>
                   Navigator.pushNamed(context, TopRatedMoviesPage.routeName),
@@ -143,7 +145,7 @@ class MovieList extends StatelessWidget {
           final movie = movies[index];
           return CardImage(
             key: Key("$description-$index"),
-            activeDrawerItem: ItemEnum.Movie,
+            activeItem: ItemEnum.Movie,
             routeNameDestination: MovieDetailPage.routeName,
             movie: movie,
           );
