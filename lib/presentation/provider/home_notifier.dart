@@ -1,12 +1,12 @@
-import 'package:ditonton/common/item_enum.dart';
+import 'package:core/core.dart' show ItemEnum;
 import 'package:flutter/foundation.dart';
 
 class HomeNotifier extends ChangeNotifier {
   ItemEnum _selectedItem = ItemEnum.Movie;
-  ItemEnum get selectedItem => _selectedItem;
+  ItemEnum get selectedDrawerItem => _selectedItem;
 
-  void setSelectedItem(ItemEnum item) {
-    this._selectedItem = item;
+  void setSelectedDrawerItem(ItemEnum newItem) {
+    this._selectedItem = newItem;
     notifyListeners();
   }
 }

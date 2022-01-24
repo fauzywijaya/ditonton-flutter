@@ -1,10 +1,10 @@
-import 'package:ditonton/common/constants.dart';
-import 'package:ditonton/presentation/pages/movie/watchlist_movies_page.dart';
-import 'package:ditonton/presentation/pages/tvshow/watchlist_tv_show_page.dart';
 import 'package:flutter/material.dart';
+import 'package:movies/movies.dart' show WatchlistMoviesPage;
+import 'package:tvshows/tvshows.dart' show WatchlistTvShowPage;
+import 'package:core/core.dart' show kMikadoYellow;
 
 class WatchlistPage extends StatelessWidget {
-  static const ROUTE_NAME = '/watchlist';
+  static const routeName = '/watchlist';
 
   const WatchlistPage({Key? key}) : super(key: key);
 

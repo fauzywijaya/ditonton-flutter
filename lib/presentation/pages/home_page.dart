@@ -1,32 +1,34 @@
-import 'package:ditonton/common/constants.dart';
-import 'package:ditonton/common/item_enum.dart';
-import 'package:ditonton/presentation/pages/about_page.dart';
-import 'package:ditonton/presentation/pages/movie/home_movie_page.dart';
+import 'package:about/about.dart' show AboutPage;
+import 'package:movies/movies.dart' show HomeMoviePage;
 import 'package:ditonton/presentation/pages/search_page.dart';
-import 'package:ditonton/presentation/pages/tvshow/home_tv_show_page.dart';
 import 'package:ditonton/presentation/pages/watchlist_page.dart';
-import 'package:ditonton/presentation/provider/home_notifier.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:tvshows/tvshows.dart' show HomeTvShowPage;
+import 'package:core/core.dart' show ItemEnum, kDavysGrey, kGrey;
 
-class HomePage extends StatelessWidget {
-  static const ROUTE_NAME = '/home';
+class HomePage extends StatefulWidget {
+  static const routeName = '/home';
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
   GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
+  ItemEnum _selectedItem = ItemEnum.Movie;
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<HomeNotifier>(builder: (ctx, data, child) {
-      final activeItem = data.selectedItem;
-
-      return Scaffold(
-        key: _drawerKey,
-        drawer: _buildDrawer(ctx, (ItemEnum newSelectedItem) {
-          data.setSelectedItem(newSelectedItem);
-        }, activeItem),
-        appBar: _buildAppBar(ctx, activeItem),
-        body: _buildBody(ctx, activeItem),
-      );
-    });
+    return Scaffold(
+      key: _drawerKey,
+      drawer: _buildDrawer(context, (ItemEnum newSelectedItem) {
+        setState(() {
+          _selectedItem = newSelectedItem;
+        });
+      }, _selectedItem),
+      appBar: _buildAppBar(context, _selectedItem),
+      body: _buildBody(context, _selectedItem),
+    );
   }
 
   Widget _buildBody(BuildContext context, ItemEnum selectedItem) {
@@ -50,7 +52,7 @@ class HomePage extends StatelessWidget {
             onPressed: () {
               Navigator.pushNamed(
                 context,
-                SearchPage.ROUTE_NAME,
+                SearchPage.routeName,
                 arguments: activeItem,
               );
             },
@@ -94,13 +96,13 @@ class HomePage extends StatelessWidget {
               title: Text('Watchlist'),
               onTap: () {
                 Navigator.pop(context);
-                Navigator.pushNamed(context, WatchlistPage.ROUTE_NAME);
+                Navigator.pushNamed(context, WatchlistPage.routeName);
               },
             ),
             ListTile(
               onTap: () {
                 Navigator.pop(context);
-                Navigator.pushNamed(context, AboutPage.ROUTE_NAME);
+                Navigator.pushNamed(context, AboutPage.routeName);
               },
               leading: Icon(Icons.info_outline),
               title: Text('About'),

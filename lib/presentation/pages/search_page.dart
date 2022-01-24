@@ -1,18 +1,15 @@
-import 'package:ditonton/common/constants.dart';
-import 'package:ditonton/common/item_enum.dart';
-import 'package:ditonton/common/state_enum.dart';
-import 'package:ditonton/domain/entities/movie.dart';
-import 'package:ditonton/domain/entities/tv_show.dart';
-import 'package:ditonton/presentation/pages/movie/movie_detail_page.dart';
-import 'package:ditonton/presentation/pages/tvshow/tv_show_detail_page.dart';
-import 'package:ditonton/presentation/provider/search_notifier.dart';
-import 'package:ditonton/presentation/widgets/card_list.dart';
-
+import 'package:core/core.dart'
+    show ItemEnum, Movie, TvShow, kBodyText, kHeading6, CardList;
+import 'package:ditonton/presentation/bloc/search_movies_bloc.dart';
+import 'package:ditonton/presentation/bloc/search_tv_shows_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movies/movies.dart' show MovieDetailPage;
 import 'package:provider/provider.dart';
+import 'package:tvshows/tvshows.dart' show TvShowDetailPage;
 
 class SearchPage extends StatelessWidget {
-  static const ROUTE_NAME = '/search';
+  static const routeName = '/search';
 
   SearchPage({
     Key? key,
@@ -20,17 +17,14 @@ class SearchPage extends StatelessWidget {
   }) : super(key: key);
 
   final ItemEnum activeItem;
-  late bool _isAlreadySearched = false;
   late String _title;
 
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<SearchNotifier>(context);
     _title = activeItem == ItemEnum.Movie ? "Movie" : "TV Show";
 
     return Scaffold(
       appBar: AppBar(
-        centerTitle: true,
         title: Text('Search $_title\s'),
       ),
       body: Padding(
@@ -40,12 +34,14 @@ class SearchPage extends StatelessWidget {
           children: [
             TextField(
               onSubmitted: (query) {
-                _isAlreadySearched = true;
-
                 if (activeItem == ItemEnum.Movie)
-                  provider.fetchMovieSearchResults(query);
+                  context
+                      .read<SearchMoviesBloc>()
+                      .add(OnQueryMoviesChange(query));
                 else
-                  provider.fetchTvShowSearchResults(query);
+                  context
+                      .read<SearchTvShowsBloc>()
+                      .add(OnQueryTvShowsChange(query));
               },
               decoration: InputDecoration(
                 hintText: 'Search title',
@@ -67,25 +63,53 @@ class SearchPage extends StatelessWidget {
   }
 
   Widget _buildSearchResults() {
-    return Consumer<SearchNotifier>(
-      builder: (ctx, data, child) {
-        if (data.state == RequestState.Loading) {
-          return Container(
-            margin: EdgeInsets.only(top: 32.0),
-            child: Center(
-              child: CircularProgressIndicator(),
-            ),
-          );
-        } else if (data.state == RequestState.Loaded && _isAlreadySearched) {
-          if (activeItem == ItemEnum.Movie)
-            return _buildMovieCardList(data.movieSearchResults);
-          else
-            return _buildTVShowCardList(data.tvShowSearchResults);
-        } else {
-          return Container();
-        }
-      },
-    );
+    if (activeItem == ItemEnum.Movie) {
+      return BlocBuilder<SearchMoviesBloc, SearchMoviesState>(
+        key: const Key('search_movies'),
+        builder: (context, state) {
+          if (state is SearchMoviesLoading) {
+            return Container(
+              margin: EdgeInsets.only(top: 32.0),
+              child: Center(
+                child: CircularProgressIndicator(),
+              ),
+            );
+          } else if (state is SearchMoviesHasData) {
+            final movies = state.result;
+            return _buildMovieCardList(movies);
+          } else if (state is SearchMoviesEmpty) {
+            return _buildMovieCardList([]);
+          } else if (state is SearchMoviesError) {
+            return _buildErrorMessage();
+          } else {
+            return Container();
+          }
+        },
+      );
+    } else {
+      return BlocBuilder<SearchTvShowsBloc, SearchTvShowsState>(
+        key: const Key('search_tv_shows'),
+        builder: (context, state) {
+          if (state is SearchTvShowsLoading) {
+            return Container(
+              margin: EdgeInsets.only(top: 32.0),
+              child: Center(
+                child: CircularProgressIndicator(),
+              ),
+            );
+          } else if (state is SearchTvShowsHasData) {
+            final tvShows = state.result;
+            return _buildTVShowCardList(tvShows);
+          } else if (state is SearchTvShowsEmpty) {
+            return _buildTVShowCardList([]);
+          } else if (state is SearchTvShowsError) {
+            return _buildErrorMessage();
+          } else {
+            return Container();
+          }
+        },
+      );
+    }
   }
 
   Widget _buildMovieCardList(List<Movie> movies) {
@@ -97,10 +121,9 @@ class SearchPage extends StatelessWidget {
         itemBuilder: (context, index) {
           final movie = movies[index];
           return CardList(
-            movie: movie,
-            activeItem: activeItem,
-            routeName: MovieDetailPage.ROUTE_NAME,
-          );
+              movie: movie,
+              activeItem: activeItem,
+              routeName: MovieDetailPage.routeName);
         },
         itemCount: movies.length,
       ),
@@ -118,7 +141,7 @@ class SearchPage extends StatelessWidget {
           return CardList(
             tvShow: tvShow,
             activeItem: activeItem,
-            routeName: TvShowDetailPage.ROUTE_NAME,
+            routeName: TvShowDetailPage.routeName,
           );
         },
         itemCount: tvShows.length,
@@ -127,6 +150,7 @@ class SearchPage extends StatelessWidget {
   }
 
   Widget _buildErrorMessage() => Container(
+        key: const Key('error_message'),
         margin: EdgeInsets.only(top: 32.0),
         child: Center(
           child: Text(
