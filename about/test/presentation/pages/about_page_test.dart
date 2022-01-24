@@ -1,19 +1,19 @@
-// import 'package:ditonton/common/constants.dart';
-// import '../../../about/lib/about_page.dart';
-// import 'package:flutter/material.dart';
-// import 'package:flutter_test/flutter_test.dart';
+import 'package:about/src/about_page.dart';
+import 'package:core/core.dart' show aboutDescriptionText;
+import 'package:flutter/material.dart';
+import 'package:flutter_test/flutter_test.dart';
 
-// main() {
-//   Widget _makeTestableWidget(Widget body) {
-//     return MaterialApp(
-//       home: body,
-//     );
-//   }
+main() {
+  Widget _makeTestableWidget(Widget body) {
+    return MaterialApp(
+      home: body,
+    );
+  }
 
-//   testWidgets('Description app text should display',
-//       (WidgetTester tester) async {
-//     await tester.pumpWidget(_makeTestableWidget(AboutPage()));
+  testWidgets('Description app text should display',
+      (WidgetTester tester) async {
+    await tester.pumpWidget(_makeTestableWidget(const AboutPage()));
 
-//     expect(find.text(ABOUT_DESCRIPTION_TEXT), findsOneWidget);
-//   });
-// }
+    expect(find.text(aboutDescriptionText), findsOneWidget);
+  });
+}

@@ -1,4 +1,5 @@
-import 'package:core/core.dart';
+import 'package:core/core.dart'
+    show aboutDescriptionText, kPrussianBlue, kMikadoYellow;
 import 'package:flutter/material.dart';
 
 class AboutPage extends StatelessWidget {
@@ -29,7 +30,7 @@ class AboutPage extends StatelessWidget {
                   padding: const EdgeInsets.all(32.0),
                   color: kMikadoYellow,
                   child: const Text(
-                    'Ditonton merupakan sebuah aplikasi katalog film yang dikembangkan oleh Dicoding Indonesia sebagai contoh proyek aplikasi untuk kelas Menjadi Flutter Developer Expert.',
+                    aboutDescriptionText,
                     style: TextStyle(color: Colors.black87, fontSize: 16),
                     textAlign: TextAlign.justify,
                   ),
