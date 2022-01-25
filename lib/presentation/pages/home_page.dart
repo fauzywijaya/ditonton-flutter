@@ -1,6 +1,5 @@
 import 'package:about/about.dart' show AboutPage;
 import 'package:movies/movies.dart' show HomeMoviePage;
-
 import 'package:ditonton/presentation/pages/watchlist_page.dart';
 import 'package:flutter/material.dart';
 import 'package:search/search.dart' show SearchPage;
