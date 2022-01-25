@@ -23,9 +23,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  firebase_analytics: ^9.0.0-dev.3
+  firebase_analytics: ^9.0.5
   firebase_core: ^1.8.0
-  firebase_crashlytics: ^2.3.0
+  firebase_crashlytics: ^2.4.5
   cupertino_icons: ^1.0.2
   dartz: ^0.10.0
   get_it: ^7.1.3
