@@ -1,10 +1,7 @@
 import 'package:about/about.dart' show AboutPage;
 import 'package:core/core.dart';
 import 'package:core/utils/ssl_pinning/http_ssl_pinning.dart';
-import 'package:ditonton/presentation/bloc/search_movies_bloc.dart';
-import 'package:ditonton/presentation/bloc/search_tv_shows_bloc.dart';
 import 'package:ditonton/presentation/pages/home_page.dart';
-import 'package:ditonton/presentation/pages/search_page.dart';
 import 'package:ditonton/presentation/pages/watchlist_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -30,6 +27,8 @@ import 'package:tvshows/tvshows.dart'
         TopRatedTvShowBloc,
         TopRatedTvShowPage,
         WatchlistTvShowBloc;
+import 'package:search/search.dart'
+    show SearchMoviesBloc, SearchTvShowsBloc, SearchPage;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ditonton/injection.dart' as di;

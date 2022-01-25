@@ -1,9 +1,10 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:core/core.dart';
 import 'package:dartz/dartz.dart';
-import 'package:ditonton/presentation/bloc/search_movies_bloc.dart';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
+import 'package:search/src/presentation/bloc/search_movies_bloc.dart';
 
 import '../../dummy_data/dummy_object.dart';
 

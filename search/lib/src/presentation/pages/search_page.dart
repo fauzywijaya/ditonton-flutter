@@ -1,11 +1,12 @@
 import 'package:core/core.dart'
     show ItemEnum, Movie, TvShow, kBodyText, kHeading6, CardList;
-import 'package:ditonton/presentation/bloc/search_movies_bloc.dart';
-import 'package:ditonton/presentation/bloc/search_tv_shows_bloc.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies/movies.dart' show MovieDetailPage;
 import 'package:provider/provider.dart';
+import 'package:search/src/presentation/bloc/search_movies_bloc.dart';
+import 'package:search/src/presentation/bloc/search_tv_shows_bloc.dart';
 import 'package:tvshows/tvshows.dart' show TvShowDetailPage;
 
 class SearchPage extends StatelessWidget {
@@ -34,23 +35,24 @@ class SearchPage extends StatelessWidget {
           children: [
             TextField(
               onSubmitted: (query) {
-                if (activeItem == ItemEnum.Movie)
+                if (activeItem == ItemEnum.Movie) {
                   context
                       .read<SearchMoviesBloc>()
                       .add(OnQueryMoviesChange(query));
-                else
+                } else {
                   context
                       .read<SearchTvShowsBloc>()
                       .add(OnQueryTvShowsChange(query));
+                }
               },
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 hintText: 'Search title',
                 prefixIcon: Icon(Icons.search),
                 border: OutlineInputBorder(),
               ),
               textInputAction: TextInputAction.search,
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Text(
               'Search Result',
               style: kHeading6,
@@ -69,8 +71,8 @@ class SearchPage extends StatelessWidget {
         builder: (context, state) {
           if (state is SearchMoviesLoading) {
             return Container(
-              margin: EdgeInsets.only(top: 32.0),
-              child: Center(
+              margin: const EdgeInsets.only(top: 32.0),
+              child: const Center(
                 child: CircularProgressIndicator(),
               ),
             );
@@ -92,8 +94,8 @@ class SearchPage extends StatelessWidget {
         builder: (context, state) {
           if (state is SearchTvShowsLoading) {
             return Container(
-              margin: EdgeInsets.only(top: 32.0),
-              child: Center(
+              margin: const EdgeInsets.only(top: 32.0),
+              child: const Center(
                 child: CircularProgressIndicator(),
               ),
             );
@@ -151,7 +153,7 @@ class SearchPage extends StatelessWidget {
 
   Widget _buildErrorMessage() => Container(
         key: const Key('error_message'),
-        margin: EdgeInsets.only(top: 32.0),
+        margin: const EdgeInsets.only(top: 32.0),
         child: Center(
           child: Text(
             '$_title\s not found!',

@@ -1,8 +1,5 @@
 import 'package:core/core.dart';
-import 'package:ditonton/presentation/bloc/search_movies_bloc.dart';
-import 'package:ditonton/presentation/bloc/search_tv_shows_bloc.dart';
-import 'package:ditonton/presentation/provider/home_notifier.dart';
-import 'package:ditonton/presentation/provider/search_notifier.dart';
+import 'package:search/search.dart' show SearchMoviesBloc, SearchTvShowsBloc;
 import 'package:movies/movies.dart'
     show
         MovieDetailBloc,
@@ -53,14 +50,14 @@ void init() {
   locator.registerFactory(() => SearchMoviesBloc(locator()));
   locator.registerFactory(() => SearchTvShowsBloc(locator()));
 
-  locator.registerFactory(() => HomeNotifier());
+  // locator.registerFactory(() => HomeNotifier());
 
-  locator.registerFactory(
-    () => SearchNotifier(
-      searchMovies: locator(),
-      searchTvShows: locator(),
-    ),
-  );
+  // locator.registerFactory(
+  //   () => SearchNotifier(
+  //     searchMovies: locator(),
+  //     searchTvShows: locator(),
+  //   ),
+  // );
 
   // use case movie
   locator.registerLazySingleton(() => GetNowPlayingMovies(locator()));

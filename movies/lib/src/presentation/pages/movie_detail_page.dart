@@ -85,8 +85,11 @@ class DetailContent extends StatefulWidget {
   bool isMovieAddedToWatchlist;
   final MovieDetail movie;
 
-  DetailContent(
-      {Key? key, required this.movie, required this.isMovieAddedToWatchlist});
+  DetailContent({
+    Key? key,
+    required this.movie,
+    required this.isMovieAddedToWatchlist,
+  });
 
   @override
   State<DetailContent> createState() => _DetailContentState();

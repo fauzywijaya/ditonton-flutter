@@ -1,7 +1,8 @@
 import 'package:bloc_test/bloc_test.dart';
-import 'package:ditonton/presentation/bloc/search_movies_bloc.dart';
-import 'package:ditonton/presentation/bloc/search_tv_shows_bloc.dart';
+
 import 'package:mocktail/mocktail.dart';
+import 'package:search/src/presentation/bloc/search_movies_bloc.dart';
+import 'package:search/src/presentation/bloc/search_tv_shows_bloc.dart';
 
 /// fake search movies bloc
 class FakeSearchMoviesEvent extends Fake implements SearchMoviesEvent {}

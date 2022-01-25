@@ -1,11 +1,12 @@
 import 'package:core/core.dart';
-import 'package:ditonton/presentation/bloc/search_movies_bloc.dart';
-import 'package:ditonton/presentation/bloc/search_tv_shows_bloc.dart';
-import 'package:ditonton/presentation/pages/search_page.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:search/src/presentation/bloc/search_movies_bloc.dart';
+import 'package:search/src/presentation/bloc/search_tv_shows_bloc.dart';
+import 'package:search/src/presentation/pages/search_page.dart';
 
 import '../../dummy_data/dummy_object.dart';
 import '../../helpers/page_test_helpers.dart';

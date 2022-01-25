@@ -1,8 +1,9 @@
 import 'package:about/about.dart' show AboutPage;
 import 'package:movies/movies.dart' show HomeMoviePage;
-import 'package:ditonton/presentation/pages/search_page.dart';
+
 import 'package:ditonton/presentation/pages/watchlist_page.dart';
 import 'package:flutter/material.dart';
+import 'package:search/search.dart' show SearchPage;
 import 'package:tvshows/tvshows.dart' show HomeTvShowPage;
 import 'package:core/core.dart' show ItemEnum, kDavysGrey, kGrey;
 
