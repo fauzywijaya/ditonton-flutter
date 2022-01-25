@@ -45,7 +45,6 @@ dependencies:
     path: tvshows
 
 dev_dependencies:
-  build_runner: ^2.1.4
   flutter_test:
     sdk: flutter
   
