@@ -43,13 +43,9 @@ dependencies:
     path: search
   tvshows:
     path: tvshows
-  
- 
 
 dev_dependencies:
-  mockito: ^5.0.16
   build_runner: ^2.1.4
-  bloc_test: ^8.5.0
   flutter_test:
     sdk: flutter
   
