@@ -15,7 +15,7 @@ dependencies:
   mocktail: ^0.2.0
   flutter_bloc: ^7.3.3
   path_provider: ^2.0.2
-
+  
   # modules
   core:
     path: ../core
