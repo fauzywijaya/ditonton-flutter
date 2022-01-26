@@ -1,4 +1,5 @@
 import 'package:core/core.dart';
+import 'package:core/utils/ssl_pinning/http_ssl_pinning.dart';
 import 'package:search/search.dart' show SearchMoviesBloc, SearchTvShowsBloc;
 import 'package:movies/movies.dart'
     show
@@ -16,7 +17,6 @@ import 'package:tvshows/tvshows.dart'
         TvShowRecommendationsBloc,
         TopRatedTvShowBloc,
         WatchlistTvShowBloc;
-import 'package:http/http.dart' as http;
 import 'package:get_it/get_it.dart';
 
 final locator = GetIt.instance;
@@ -49,15 +49,6 @@ void init() {
 
   locator.registerFactory(() => SearchMoviesBloc(locator()));
   locator.registerFactory(() => SearchTvShowsBloc(locator()));
-
-  // locator.registerFactory(() => HomeNotifier());
-
-  // locator.registerFactory(
-  //   () => SearchNotifier(
-  //     searchMovies: locator(),
-  //     searchTvShows: locator(),
-  //   ),
-  // );
 
   // use case movie
   locator.registerLazySingleton(() => GetNowPlayingMovies(locator()));
@@ -127,5 +118,5 @@ void init() {
   locator.registerLazySingleton<DatabaseHelper>(() => DatabaseHelper());
 
   // external
-  locator.registerLazySingleton(() => http.Client());
+  locator.registerLazySingleton(() => HttpSSLPinning.client);
 }
