@@ -52,6 +52,7 @@ class _TvShowDetailPageState extends State<TvShowDetailPage> {
         (bloc) => (bloc.state is TvShowIsAddedToWatchlist)
             ? (bloc.state as TvShowIsAddedToWatchlist).isAdded
             : false);
+
     return SafeArea(
       child: Scaffold(
           body: BlocBuilder<TvShowDetailBloc, TvShowDetailState>(
@@ -111,37 +112,36 @@ class _DetailContentState extends State<DetailContent> {
               context
                   .read<WatchlistTvShowBloc>()
                   .add(RemoveTvShowFromWatchlist(widget.tvShow));
-
-              final state = BlocProvider.of<WatchlistTvShowBloc>(context).state;
-              String message = "";
-
-              if (state is TvShowIsAddedToWatchlist) {
-                final isAdded = state.isAdded;
-                message = isAdded == false ? addMessage : removeMessage;
-              } else {
-                message = !widget.isTvShowAddedToWatchlist
-                    ? addMessage
-                    : removeMessage;
-              }
-
-              if (message == addMessage || message == removeMessage) {
-                ScaffoldMessenger.of(context)
-                    .showSnackBar(SnackBar(content: Text(message)));
-              } else {
-                showDialog(
-                    context: context,
-                    builder: (context) {
-                      return AlertDialog(
-                        content: Text(message),
-                      );
-                    });
-              }
-
-              setState(() {
-                widget.isTvShowAddedToWatchlist =
-                    !widget.isTvShowAddedToWatchlist;
-              });
             }
+
+            final state = BlocProvider.of<WatchlistTvShowBloc>(context).state;
+            String message = "";
+
+            if (state is TvShowIsAddedToWatchlist) {
+              final isAdded = state.isAdded;
+              message = isAdded == false ? addMessage : removeMessage;
+            } else {
+              message =
+                  !widget.isTvShowAddedToWatchlist ? addMessage : removeMessage;
+            }
+
+            if (message == addMessage || message == removeMessage) {
+              ScaffoldMessenger.of(context)
+                  .showSnackBar(SnackBar(content: Text(message)));
+            } else {
+              showDialog(
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                      content: Text(message),
+                    );
+                  });
+            }
+
+            setState(() {
+              widget.isTvShowAddedToWatchlist =
+                  !widget.isTvShowAddedToWatchlist;
+            });
           },
           child: Row(
             mainAxisSize: MainAxisSize.min,
